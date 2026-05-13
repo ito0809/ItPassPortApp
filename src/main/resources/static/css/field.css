@@ -1,0 +1,113 @@
+@charset "utf-8";
+.preface{
+    margin: 100px 0 80px 0;
+}
+.contents{
+    width: 100%;
+    /*!*max-width: 1000px;*!あとでここ変更する*/
+    align-items: flex-start;
+}
+.mini-quiz,
+.field {
+    width: 100%;
+    padding: 50px;
+}
+.mini-quiz{
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 24px;              /* 文章と画像の間隔 */
+    /*align-items: flex-start;!* 上を揃える *!*/
+}
+.mini-quiz-text{
+    margin: 1px 10px 40px 0;
+}
+#quizForm{
+    margin: 10px auto;
+}
+.choice{
+    display: block;      /* 1行ずつ縦に並ぶ */
+    text-align: left;    /* ← ここがポイント */
+    margin: 2px 0;
+}
+.mini-quiz-img{
+    display: block;
+    margin: 0 20px;
+    width: 100%;
+    max-width: 520px;
+}
+.field-title{
+    margin: 100px 0 80px 0;
+}
+.field-button-aria{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 80px;          /* 見た目用の間隔 */
+    max-width: 1000px; /* 全体幅を制限 */
+    margin: 0 auto;    /* 全体を中央へ */
+}
+
+.fleld-img{
+    flex: 1;           /* ← 左も右も同じ比率 */
+    max-width: 480px;
+}
+
+.field-button{
+    flex: 1;           /* ← ここがポイント */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+.field-button{
+    display: flex;
+    justify-content: center;
+    flex-direction: column; /* ← 3つを縦に */
+    gap: 16px;              /* ← 間隔 */
+}
+.fleld-img{
+    margin: 0 20px;
+    width: 100%;
+    max-width: 500px;
+}
+.quiz-button{
+    display: block;      /* ← flex じゃなくて block */
+    margin: 35px auto;   /* ← 中央寄せ */
+    padding: 10px 16px;
+    border-radius: 10px;
+    background-color: #3fa58a;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+}
+
+#quizResult {
+    white-space: pre-line;
+    line-height: 1.6; /* 任意 */
+}
+.field-button a{
+    margin: 10px 30px;
+    padding: 14px 32px;
+    border-radius: 999px;
+    background-color: #3fa58a;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: background-color 0.3s ease,
+    transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+
+/* ⑤ 状態（動き） */
+.field-button:hover a{
+    background-color: #369b81;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}

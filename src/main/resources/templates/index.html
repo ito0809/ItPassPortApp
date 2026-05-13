@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ITパス学習アプリ</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: siteHeader}"></header>
+    <section class="title">
+        <p>優しく学べる学習アプリ</p>
+        <h1>初めてのITパスポート</h1>
+    </section>
+
+    <main class="container hero">
+
+        <!-- 左：文章 -->
+        <section class="white-aria">
+            <img src="/images/explain/top.png" alt="トップ画像" class="top-image">
+            <section class="setumei">
+                <p>スキマ時間でサクッと学習</p>
+                <p>初めてでも理解しやすい解説付き</p>
+                <p>ITの世界にとびこもう！</p>
+
+            </section>
+            <a th:if="${session.loginUser != null}" th:href="@{/field}" class="start-link">学習を始める</a>
+            <button th:if="${session.loginUser == null}" type="button" class="start-link start-button" data-modal-open="loginModal">ログインして始める</button>
+        </section>
+
+        <div class="continue-section" th:if="${session.loginUser != null}">
+            <div class="continue-header">
+                <div>
+                    <p class="continue-eyebrow">Continue Learning</p>
+                    <div class="continue-title">続きから始める</div>
+                </div>
+                <p class="continue-copy">前回の続きから、そのまま再開できます。</p>
+            </div>
+            <div class="continue-button">
+                <a th:href="@{/continued(field='strategy')}" class="continuation-link continuation-link-strategy">
+                    <div class="continuation-top">
+                        <div class="continuation-text">
+                            <span class="field-name">ストラテジ</span>
+                        </div>
+                    </div>
+                    <div class="continuation-progress">
+                        <div class="progress-meta">
+                            <span class="progress-text"
+                                  th:text="${strategyProgress} + '/' + ${strategyTotal} + '問中'"></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"
+                                 th:style="'width:' + (${strategyTotal == 0 ? 0 : (strategyProgress * 100 / strategyTotal)}) + '%;'">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a th:href="@{/continued(field='management')}" class="continuation-link continuation-link-management">
+                    <div class="continuation-top">
+                        <div class="continuation-text">
+                            <span class="field-name">マネジメント</span>
+                        </div>
+                    </div>
+                    <div class="continuation-progress">
+                        <div class="progress-meta">
+                            <span class="progress-text"
+                                  th:text="${managementProgress} + '/' + ${managementTotal} + '問中'"></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"
+                                 th:style="'width:' + (${managementTotal == 0 ? 0 : (managementProgress * 100 / managementTotal)}) + '%;'">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a th:href="@{/continued(field='technology')}" class="continuation-link continuation-link-technology">
+                    <div class="continuation-top">
+                        <div class="continuation-text">
+                            <span class="field-name">テクノロジ</span>
+                        </div>
+                    </div>
+                    <div class="continuation-progress">
+                        <div class="progress-meta">
+                            <span class="progress-text"
+                                  th:text="${technologyProgress} + '/' + ${technologyTotal} + '問中'"></span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill"
+                                 th:style="'width:' + (${technologyTotal == 0 ? 0 : (technologyProgress * 100 / technologyTotal)}) + '%;'">
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- 右：画像＋ボタン -->
+        <section class="it-pass">
+            <section class="it-pass-left">
+                <h3>ITパスポートとは・・・？</h3>
+                <p>
+                    ITの基礎知識を身につける為の国家試験です。<br>
+                    文系・未経験の方でも学びやすく、<br>
+                    社会人や学生にも人気があります。
+                </p>
+            </section>
+
+            <img src="/images/explain/top2.jpg"
+                 alt="ITパスポートとは"
+                 class="top-image2">
+        </section>
+    </main>
+    <div class="login-modal" th:if="${session.loginUser == null}"
+         th:classappend="${openLoginModal} ? ' is-open' : ''"
+         id="loginModal"
+         aria-hidden="true">
+        <div class="login-modal__backdrop" data-modal-close></div>
+        <section class="login-modal__panel" role="dialog" aria-modal="true" aria-labelledby="loginModalTitle">
+            <button type="button" class="login-modal__close" aria-label="閉じる" data-modal-close>&times;</button>
+            <h2 id="loginModalTitle" class="login-modal__title">ログイン</h2>
+            <form th:action="@{/login}" method="post" class="login-modal__form">
+                <input type="hidden" name="from" value="index">
+                <div class="login-modal__field">
+                    <label for="modal-email">メールアドレス</label>
+                    <input id="modal-email" type="email" name="email" th:value="${email}" required>
+                </div>
+                <div class="login-modal__field">
+                    <label for="modal-password">パスワード</label>
+                    <input id="modal-password" type="password" name="password" required>
+                </div>
+        <p th:if="${error != null and (openSignupModal == null or !openSignupModal)}"
+           th:text="${error}"
+           class="login-modal__error"></p>
+                <button type="submit" class="login-modal__submit">ログイン</button>
+            </form>
+            <button type="button" class="login-modal__switch" data-modal-switch="signupModal">新規登録はこちら</button>
+        </section>
+    </div>
+    <div class="login-modal" th:if="${session.loginUser == null}"
+         th:classappend="${openSignupModal} ? ' is-open' : ''"
+         id="signupModal"
+         aria-hidden="true">
+        <div class="login-modal__backdrop" data-modal-close></div>
+        <section class="login-modal__panel" role="dialog" aria-modal="true" aria-labelledby="signupModalTitle">
+            <button type="button" class="login-modal__close" aria-label="閉じる" data-modal-close>&times;</button>
+            <h2 id="signupModalTitle" class="login-modal__title">新規登録</h2>
+            <form th:action="@{/signUp}" method="post" class="login-modal__form">
+                <input type="hidden" name="from" value="index">
+                <div class="login-modal__field">
+                    <label for="signup-name">名前（フルネーム）</label>
+                    <input id="signup-name" type="text" name="name" th:value="${signupName}" required>
+                </div>
+                <div class="login-modal__field">
+                    <label for="signup-email">メールアドレス</label>
+                    <input id="signup-email" type="email" name="email" th:value="${signupEmail}" required>
+                </div>
+                <div class="login-modal__field">
+                    <label for="signup-password">パスワード</label>
+                    <input id="signup-password" type="password" name="password" required>
+                </div>
+                <div class="login-modal__field">
+                    <label for="signup-confirm-password">パスワード（確認用）</label>
+                    <input id="signup-confirm-password" type="password" name="confirmPassword" required>
+                </div>
+                <p th:if="${openSignupModal != null and openSignupModal and error != null}"
+                   th:text="${error}"
+                   class="login-modal__error"></p>
+                <button type="submit" class="login-modal__submit">登録する</button>
+            </form>
+            <button type="button" class="login-modal__switch" data-modal-switch="loginModal">ログインはこちら</button>
+        </section>
+    </div>
+    <script>
+        (() => {
+            const modals = Array.from(document.querySelectorAll('.login-modal'));
+            if (modals.length === 0) return;
+
+            const closeAll = () => {
+                modals.forEach((modal) => {
+                    modal.classList.remove('is-open');
+                    modal.setAttribute('aria-hidden', 'true');
+                });
+                document.body.classList.remove('modal-open');
+            };
+
+            const openModal = (modalId) => {
+                closeAll();
+                const modal = document.getElementById(modalId);
+                if (!modal) return;
+                modal.classList.add('is-open');
+                modal.setAttribute('aria-hidden', 'false');
+                document.body.classList.add('modal-open');
+            };
+
+            document.querySelectorAll('[data-modal-open]').forEach((button) => {
+                button.addEventListener('click', () => openModal(button.dataset.modalOpen));
+            });
+
+            document.querySelectorAll('[data-modal-switch]').forEach((button) => {
+                button.addEventListener('click', () => openModal(button.dataset.modalSwitch));
+            });
+
+            document.querySelectorAll('[data-modal-close]').forEach((button) => {
+                button.addEventListener('click', closeAll);
+            });
+
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeAll();
+                }
+            });
+
+            const openedModal = modals.find((modal) => modal.classList.contains('is-open'));
+            if (openedModal) {
+                openModal(openedModal.id);
+            }
+        })();
+    </script>
+</body>
+<hr>
+<footer>
+    <p class="copyright">
+        © 2026 ITパス学習アプリ
+    </p>
+    <p class="credits index-credits">
+        イラスト提供<br>
+        <a href="https://jp.freepik.com/free-vector/team-programmers-working-program-code-with-laptops-teamwork-male-female-professional-testers-coders-flat-vector-illustration-software-development-programming-lesson-concept_22344038.htm">著作者：pch.vector／出典：Freepik</a><br>
+        <a href="https://jp.freepik.com/free-vector/people-networking-through-technology_2921022.htm">著作者：rawpixel.com／出典：Freepik</a>
+
+    </p>
+</footer>
+</html>

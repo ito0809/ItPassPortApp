@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <title>管理者ページ</title>
+        <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/css/common.css">
+        <link rel="stylesheet" href="/css/admin.css">
+    </head>
+    <body>
+        <header th:replace="~{fragments/header :: siteHeader}"></header>
+        <main class="admin-main">
+            <section class="admin-hero">
+                <p class="admin-kicker">Question Create</p>
+                <h1>問題追加</h1>
+                <p class="admin-lead">複数の問題をまとめて追加できます。空の問題文は登録対象になりません。</p>
+            </section>
+
+            <section class="admin-section">
+                <div class="admin-section-header">
+                    <div>
+                        <p class="admin-section-label">Bulk Register</p>
+                        <h2>登録フォーム</h2>
+                    </div>
+                </div>
+
+                <form th:action="@{/question_add}" method="post" id="questionForm">
+                    <div id="questionContainer" class="admin-question-stack">
+                        <div class="admin-question-block question-block">
+                            <h3>問題1</h3>
+                            <div class="admin-question-grid">
+                                <div class="admin-field">
+                                    <label>分野</label>
+                                    <select name="field">
+                                        <option value="strategy" selected>ストラテジ</option>
+                                        <option value="management">マネジメント</option>
+                                        <option value="technology">テクノロジ</option>
+                                    </select>
+                                </div>
+
+                                <div class="admin-field">
+                                    <label>問題文</label>
+                                    <textarea name="questionText" placeholder="問題文"></textarea>
+                                </div>
+
+                                <div class="admin-question-grid-columns">
+                                    <div class="admin-field">
+                                        <label>選択肢1</label>
+                                        <input type="text" name="choice1" placeholder="選択肢1">
+                                    </div>
+                                    <div class="admin-field">
+                                        <label>選択肢2</label>
+                                        <input type="text" name="choice2" placeholder="選択肢2">
+                                    </div>
+                                    <div class="admin-field">
+                                        <label>選択肢3</label>
+                                        <input type="text" name="choice3" placeholder="選択肢3">
+                                    </div>
+                                    <div class="admin-field">
+                                        <label>選択肢4</label>
+                                        <input type="text" name="choice4" placeholder="選択肢4">
+                                    </div>
+                                </div>
+
+                                <div class="admin-field">
+                                    <label>正解の選択肢番号</label>
+                                    <select name="correctAnswer">
+                                        <option value="1" selected>選択肢1</option>
+                                        <option value="2">選択肢2</option>
+                                        <option value="3">選択肢3</option>
+                                        <option value="4">選択肢4</option>
+                                    </select>
+                                </div>
+
+                                <div class="admin-field">
+                                    <label>解説文</label>
+                                    <textarea name="explanation" placeholder="解説文"></textarea>
+                                </div>
+
+                                <div class="admin-field">
+                                    <label>実際の試験で出る問題文</label>
+                                    <textarea name="realExamExample" placeholder="実際の試験で出る問題文"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="admin-form-actions">
+                        <button type="button" onclick="addQuestionBlock()" class="admin-link-button">＋問題を追加</button>
+                        <button type="submit" class="admin-button">まとめて登録</button>
+                        <a th:href="@{/question_control_page}" class="admin-link-button">問題一覧へ戻る</a>
+                    </div>
+                </form>
+            </section>
+        </main>
+    </body>
+    <script>
+        let questionCount = 1;
+
+        function addQuestionBlock() {
+            questionCount++;
+
+            const container = document.getElementById("questionContainer");
+
+            const block = document.createElement("div");
+            block.className = "admin-question-block question-block";
+
+            block.innerHTML = `
+                <h3>問題${questionCount}</h3>
+                <div class="admin-question-grid">
+                    <div class="admin-field">
+                        <label>分野</label>
+                        <select name="field">
+                            <option value="strategy" selected>ストラテジ</option>
+                            <option value="management">マネジメント</option>
+                            <option value="technology">テクノロジ</option>
+                        </select>
+                    </div>
+
+                    <div class="admin-field">
+                        <label>問題文</label>
+                        <textarea name="questionText" placeholder="問題文"></textarea>
+                    </div>
+
+                    <div class="admin-question-grid-columns">
+                        <div class="admin-field">
+                            <label>選択肢1</label>
+                            <input type="text" name="choice1" placeholder="選択肢1">
+                        </div>
+                        <div class="admin-field">
+                            <label>選択肢2</label>
+                            <input type="text" name="choice2" placeholder="選択肢2">
+                        </div>
+                        <div class="admin-field">
+                            <label>選択肢3</label>
+                            <input type="text" name="choice3" placeholder="選択肢3">
+                        </div>
+                        <div class="admin-field">
+                            <label>選択肢4</label>
+                            <input type="text" name="choice4" placeholder="選択肢4">
+                        </div>
+                    </div>
+
+                    <div class="admin-field">
+                        <label>正解の選択肢番号</label>
+                        <select name="correctAnswer">
+                            <option value="1" selected>選択肢1</option>
+                            <option value="2">選択肢2</option>
+                            <option value="3">選択肢3</option>
+                            <option value="4">選択肢4</option>
+                        </select>
+                    </div>
+
+                    <div class="admin-field">
+                        <label>解説文</label>
+                        <textarea name="explanation" placeholder="解説文"></textarea>
+                    </div>
+
+                    <div class="admin-field">
+                        <label>実際の試験で出る問題文</label>
+                        <textarea name="realExamExample" placeholder="実際の試験で出る問題文"></textarea>
+                    </div>
+                </div>
+            `;
+
+            container.appendChild(block);
+        }
+
+        function removeQuestionBlock(button) {
+            const block = button.parentElement;
+            block.remove();
+        }
+    </script>
+    <hr>
+    <footer>
+        <p class="copyright">
+            © 2026 ITパス学習アプリ
+        </p>
+
+
+        <p class="credits">
+            イラスト提供：
+            <a href="https://jp.freepik.com/free-vector/team-programmers-working-program-code-with-laptops-teamwork-male-female-professional-testers-coders-flat-vector-illustration-software-development-programming-lesson-concept_22344038.htm">著作者：pch.vector／出典：Freepik</a>
+
+        </p>
+    </footer>
+</html>

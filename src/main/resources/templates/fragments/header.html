@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<body>
+<header class="header-wrap" th:fragment="siteHeader">
+    <div class="header">
+        <section class="header-title">
+            <p>優しく学べる学習アプリ</p>
+            <h1>初めてのITパスポート</h1>
+        </section>
+        <section class="header-right">
+            <div class="login-info">
+                <div class="login-name">
+                    <div class="login-name-menu" th:if="${session.loginUserName != null}">
+                        <p>
+                            <a th:href="@{/myPage#myPageTop}" class="login-name-link">
+                                ログイン中：
+                                <span th:text="${session.loginUserName}"></span>さん
+                            </a>
+                        </p>
+                        <div class="login-name-tooltip">
+                            <a th:href="@{/myPage#myPageStudyManagement}" class="login-name-tooltip-link">学習管理</a>
+                            <a th:href="@{/myPage#myPageAccount}" class="login-name-tooltip-link">アカウント</a>
+                            <a th:href="@{/logout}" class="login-name-tooltip-link" onclick="return confirm('ログアウトしますか？');">ログアウト</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <nav class="menu">
+                <div class="menu-item" th:if="${session.loginUser != null}">
+                    <a th:href="@{/question(field='strategy', index=0)}" class="menu-parent-link">ストラテジ</a>
+                    <div class="menu-tooltip">
+                        <a th:href="@{/question(field='strategy', index=0)}" class="menu-tooltip-link">はじめから</a>
+                        <a th:href="@{/continued(field='strategy')}" class="menu-tooltip-link">続きから</a>
+                    </div>
+                </div>
+                <div class="menu-item" th:if="${session.loginUser != null}">
+                    <a th:href="@{/question(field='management', index=0)}" class="menu-parent-link">マネジメント</a>
+                    <div class="menu-tooltip">
+                        <a th:href="@{/question(field='management', index=0)}" class="menu-tooltip-link">はじめから</a>
+                        <a th:href="@{/continued(field='management')}" class="menu-tooltip-link">続きから</a>
+                    </div>
+                </div>
+                <div class="menu-item" th:if="${session.loginUser != null}">
+                    <a th:href="@{/question(field='technology', index=0)}" class="menu-parent-link">テクノロジ</a>
+                    <div class="menu-tooltip">
+                        <a th:href="@{/question(field='technology', index=0)}" class="menu-tooltip-link">はじめから</a>
+                        <a th:href="@{/continued(field='technology')}" class="menu-tooltip-link">続きから</a>
+                    </div>
+                </div>
+                <a th:if="${session.loginUser == null}" th:href="@{/index(openLoginModal=1)}">ストラテジ</a><br th:if="${session.loginUser == null}">
+                <a th:if="${session.loginUser == null}" th:href="@{/index(openLoginModal=1)}">マネジメント</a><br th:if="${session.loginUser == null}">
+                <a th:if="${session.loginUser == null}" th:href="@{/index(openLoginModal=1)}">テクノロジ</a><br th:if="${session.loginUser == null}">
+            </nav>
+        </section>
+    </div>
+</header>
+</body>
+</html>

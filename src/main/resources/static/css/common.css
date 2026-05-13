@@ -1,0 +1,302 @@
+/* ① 全体（ベース）全ページ共通 */
+html, body{
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow-x: hidden;
+}
+body {
+    background-color: #e3f1ec;
+    font-family: "M PLUS 1p", sans-serif;
+    text-align: center;
+    margin: 0;
+}
+
+/* ② レイアウト構造 */
+.header-wrap{
+    /*width: 100%;*/
+    /*max-width: none !important;*/
+    /*background: #fff; !* ←白はこっちで横いっぱい *!*/
+    width: 100%;
+    background: #fff;
+    max-width: none;
+    padding: 15px 0;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 24px;
+    padding: 25px 5px 12px 5px;
+
+    max-width: 1200px; /* ←中身だけ制限 */
+    margin: 0 auto;
+    background: transparent; /* ←念のため */
+}
+
+.header-title{
+    padding: 0 20px;
+}
+/* タイトル側 */
+.header-title p{
+    font-size: 15px;
+    margin: 0 0 6px;
+}
+.header-title h1{
+    font-size: 23px;
+    margin: 0;
+}
+.header-right{
+   /*display: flex;*/
+   flex-direction: column;
+   align-items: flex-end;
+   gap: 12px;
+   flex: 0 0 auto;
+   min-width: max-content;
+ }
+
+ .login-info{
+   display: flex;
+   align-items: center;
+   justify-content: flex-end;
+   gap: 20px;
+   width: 100%;
+   white-space: nowrap;
+ }
+
+ .login-name p{
+   padding: 8px 12px;
+   margin: 0;                  /* pのデフォ余白を消す */
+ }
+
+.login-name-menu{
+    position: relative;
+}
+
+.login-name-link{
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    color: #1f7a5a;
+    border-radius: 999px;
+    transition: background-color 0.2s ease;
+    font-weight: 600;
+}
+
+.login-name-link:hover,
+.login-name-link:focus-visible{
+    background-color: #f2faf7;
+    outline: none;
+}
+
+.login-name-tooltip{
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 12px;
+    display: grid;
+    gap: 8px;
+    min-width: 148px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+}
+
+.login-name-menu:hover .login-name-tooltip,
+.login-name-menu:focus-within .login-name-tooltip{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.login-name-tooltip-link{
+    display: block;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #1f7a5a;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(31, 122, 90, 0.16);
+    border: 1px solid #d6e8e0;
+    text-align: left;
+}
+
+.login-name-tooltip-link:hover,
+.login-name-tooltip-link:focus-visible{
+    background: #f2faf7;
+    outline: none;
+}
+
+.logout{
+   padding: 8px 12px;
+   display:flex;
+}
+.menu{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: nowrap;
+    width: 100%;
+}
+
+.menu br{
+    display: none;
+}
+
+/* メニューリンクの見た目（お好み） */
+.menu a{
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    color: #1f7a5a;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 999px;
+}
+
+.menu-item{
+    position: relative;
+}
+
+.menu-parent-link{
+    display: flex;
+    align-items: flex-end;
+    text-decoration: none;
+    color: #1f7a5a;
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 999px;
+}
+
+.menu-parent-link:hover,
+.menu-parent-link:focus-visible{
+    background-color: #f2faf7;
+    outline: none;
+}
+
+.menu-tooltip{
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 0;
+    display: grid;
+    gap: 8px;
+    min-width: 120px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease;
+    z-index: 10;
+}
+
+.menu-item:hover .menu-tooltip,
+.menu-item:focus-within .menu-tooltip{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-tooltip-link{
+    display: block;
+    padding: 8px 14px;
+    border-radius: 12px;
+    background: #ffffff;
+    color: #1f7a5a;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: left;
+    box-shadow: 0 8px 24px rgba(31, 122, 90, 0.16);
+    border: 1px solid #d6e8e0;
+}
+
+.menu-tooltip-link:hover,
+.menu-tooltip-link:focus-visible{
+    background: #f2faf7;
+    outline: none;
+}
+
+@media (max-width: 768px) {
+    .header{
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 12px 12px;
+    }
+
+    .header-title{
+        padding: 0;
+        text-align: center;
+    }
+
+    .header-right{
+        width: 100%;
+        min-width: 0;
+        align-items: center;
+    }
+
+    .login-info,
+    .menu{
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+}
+header p,
+header h1{
+    display: block;
+    text-align: start;
+}
+header p{
+    margin: 0;
+}
+.main{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+footer {
+    color: #777;
+    margin-top: 30px;
+}
+.top-page{
+    display: block;
+    text-align: left;
+
+    margin: 20px 0 20px 30px;
+}
+.credits{
+    padding: 20px 0;
+    text-align: left;
+}
+/* ③ 共通要素（安全な形だけ） */
+img{
+    max-width: 100%;
+    height: auto;
+}
+
+/* ④ コンポーネント（部品） */
+.start-link {
+    display: block;
+    width: fit-content;
+    margin: 40px auto;
+    padding: 14px 32px;
+    border-radius: 999px;
+    background-color: #3fa58a;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+
+/* ⑤ 状態（動き） */
+.start-link:hover {
+    background-color: #369b81;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}

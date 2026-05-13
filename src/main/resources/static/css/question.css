@@ -1,0 +1,58 @@
+@charset "UTF-8";
+
+.main-title h1{
+    margin: 100px 0 80px 0;
+}
+.question-aria{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: white;
+    padding: 50px;
+    gap: 50px;
+}
+.question-text{
+    text-align: left;
+    max-width: 600px; /* 横に広がりすぎ防止（おすすめ） */
+}
+.question-text h1{
+    font-size: 20px;
+    padding-bottom: 20px;
+}
+.quiz-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.question-button form {
+    display: flex;
+    margin-left: 40px;
+    flex-direction: column; /* ← 縦並びの決定打 */
+    gap: 12px;              /* ボタン同士の余白 */
+}
+
+.question-button button {
+    margin: 10px 30px;
+    padding: 14px 32px;
+    border-radius: 999px;
+
+    background-color: #3fa58a;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+
+    border: none;
+    outline: none;
+
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    cursor: pointer;
+
+    transition: background-color 0.3s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.question-button button:hover {
+    background-color: #369b81;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}

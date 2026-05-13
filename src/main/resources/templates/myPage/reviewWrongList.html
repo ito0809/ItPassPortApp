@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>マイページ問題管理</title>
+  <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/common.css">
+  <link rel="stylesheet" href="/css/reviewWrongList.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: siteHeader}"></header>
+<main class="review-main">
+  <section class="review-hero">
+    <p class="review-kicker">Review Menu</p>
+    <h1>復習ページ</h1>
+    <p class="review-lead">間違えた問題を一覧で確認して、気になる問題から復習できます。</p>
+  </section>
+
+  <div class="search">
+    <!--    検索エリアボタン-->
+<!--    <form th:action ="@{/question_control_page}" method="get">-->
+<!--      <select name="field">-->
+<!--        <option value="" selected>全て</option>-->
+<!--        <option value="strategy">ストラテジ</option>-->
+<!--        <option value="management">マネジメント</option>-->
+<!--        <option value="technology">テクノロジ</option>-->
+<!--      </select>-->
+<!--      <input type="text" name="keyword" placeholder="キーワード検索">-->
+<!--      <button type="submit">検索</button>-->
+
+<!--    </form>-->
+  </div>
+
+  <!--    検索結果用-->
+<!--  <div th:if="${(keyword != null and keyword != '') or (field != null and field != '')}">-->
+<!--    <h2>検索結果</h2>-->
+<!--    <table border="1">-->
+<!--      <tr>-->
+<!--        <td></td>-->
+<!--        <td>分野</td>-->
+<!--        <td>問題文</td>-->
+<!--      </tr>-->
+
+<!--      <tr th:each="q:${questions}">-->
+<!--        <td>復習ボタン</td>-->
+<!--        <td th:text="${#strings.equalsIgnoreCase(#strings.trim(q.field), 'strategy') ? 'ストラテジ' :-->
+<!--                      #strings.equalsIgnoreCase(#strings.trim(q.field), 'management') ? 'マネジメント' :-->
+<!--                      #strings.equalsIgnoreCase(#strings.trim(q.field), 'technology') ? 'テクノロジ' :-->
+<!--                      q.field}">-->
+<!--        </td>-->
+<!--        <td th:text="${q.questionText}"></td>-->
+<!--      </tr>-->
+<!--    </table>-->
+<!--  </div>-->
+
+  <!--一覧よう-->
+<!--  <div th:unless="${(keyword != null and keyword != '') or (field != null and field != '')}">-->
+  <section class="review-card review-empty" th:if ="${message}">
+    <p th:text="${message}"></p>
+  </section>
+
+  <section class="review-card" th:if="${questions != null and !#lists.isEmpty(questions)}">
+    <div class="review-section-head">
+      <div>
+        <p class="review-section-label">Wrong Questions</p>
+        <h2>問題一覧</h2>
+      </div>
+      <p class="review-count" th:text="${#lists.size(questions)} + '件'">0件</p>
+    </div>
+
+    <div class="review-table-wrap">
+      <table class="review-table">
+        <thead>
+        <tr>
+          <th>操　作</th>
+          <th>分　野</th>
+          <th>問　題　文</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="q, stat : ${questions}">
+          <td class="review-action-cell">
+            <a th:href="@{/wrongQuestions(index=${stat.index})}" class="review-link">
+              復習する
+            </a>
+          </td>
+          <td class="review-field-cell" th:text="${#strings.equals(#strings.trim(q.field), 'strategy') ? 'ストラテジ' :
+                  #strings.equals(#strings.trim(q.field), 'management') ? 'マネジメント' :
+                  #strings.equals(#strings.trim(q.field), 'technology') ? 'テクノロジ' :
+                  q.field}">
+          </td>
+          <td class="review-question-text" th:text="${q.questionText}"></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</main>
+</body>
+<hr>
+<footer>
+  <p class="copyright">
+    © 2026 ITパス学習アプリ
+  </p>
+
+
+  <p class="credits">
+    イラスト提供：
+    <a href="https://jp.freepik.com/free-vector/team-programmers-working-program-code-with-laptops-teamwork-male-female-professional-testers-coders-flat-vector-illustration-software-development-programming-lesson-concept_22344038.htm">著作者：pch.vector／出典：Freepik</a>
+
+  </p>
+</footer>
+</html>

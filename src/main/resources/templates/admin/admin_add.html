@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>管理者ページ</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: siteHeader}"></header>
+<main class="admin-main">
+    <section class="admin-hero">
+        <p class="admin-kicker">Admin Account</p>
+        <h1>管理者追加</h1>
+        <p class="admin-lead">新しい管理者アカウントを登録します。入力内容を確認してから追加してください。</p>
+    </section>
+
+    <section class="admin-section">
+        <div class="admin-section-header">
+            <div>
+                <p class="admin-section-label">Create Account</p>
+                <h2>登録フォーム</h2>
+            </div>
+        </div>
+
+        <p th:if="${error}" th:text="${error}" class="admin-message admin-message-error"></p>
+        <p th:if="${user}" th:text="${user}" class="admin-message admin-message-success"></p>
+
+        <form th:action="@{admin_add}" name="adminAdd" method="post" class="admin-form-grid">
+            <div class="admin-field">
+                <label for="admin-name">名前（フルネーム）</label>
+                <input id="admin-name" type="text" name="name" required>
+            </div>
+            <div class="admin-field">
+                <label for="admin-email">メールアドレス</label>
+                <input id="admin-email" type="email" name="email" required>
+            </div>
+            <div class="admin-field">
+                <label for="admin-password">パスワード</label>
+                <input id="admin-password" type="password" name="password" required>
+            </div>
+            <div class="admin-field">
+                <label for="admin-confirm-password">パスワード（確認用）</label>
+                <input id="admin-confirm-password" type="password" name="confirmPassword" required>
+            </div>
+            <div class="admin-form-actions">
+                <button type="submit" class="admin-button">登録する</button>
+            </div>
+        </form>
+    </section>
+
+    <div class="admin-back-link-wrap">
+        <a th:href="@{/admin}" class="admin-back-link">← 管理者ページに戻る</a>
+    </div>
+</main>
+</body>
+<hr>
+<footer>
+    <p class="copyright">
+        © 2026 ITパス学習アプリ
+    </p>
+
+
+    <p class="credits">
+
+    </p>
+</footer>
+</html>

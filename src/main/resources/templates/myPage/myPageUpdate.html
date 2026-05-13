@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>マイページ更新</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/index.css">
+</head>
+<body>
+    <header th:replace="~{fragments/header :: siteHeader}"></header>
+    <main>
+        <h2>登録情報更新ページ</h2>
+        <p>現在のメールアドレス:</p><span th:text="${user.email}"></span>
+
+        <form th:action="@{emailUpdate}" method="post" >
+            <label>
+                <p>新しいメールアドレス</p>
+                <input type="email" name="newEmail" required>
+            </label>
+            <button type="submit">新しく登録</button>
+        </form>
+        <p th:if="${error}" th:text="${error}" style="color:red;"></p>
+        <p th:if="${success}" th:text="${success}" style="color:green;"></p>
+
+
+
+
+
+        <!--        名前の変更いるかな？-->
+<!--        <p th:text="${user.name}">現在の名前</p>-->
+
+
+    </main>
+</body>
+<hr>
+<footer>
+    <p class="copyright">
+        © 2026 ITパス学習アプリ
+    </p>
+
+
+    <p class="credits">
+        イラスト提供：
+        <a href="https://jp.freepik.com/free-vector/team-programmers-working-program-code-with-laptops-teamwork-male-female-professional-testers-coders-flat-vector-illustration-software-development-programming-lesson-concept_22344038.htm">著作者：pch.vector／出典：Freepik</a>
+
+    </p>
+</footer>
+</html>

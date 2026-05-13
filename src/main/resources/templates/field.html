@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>分野</title>
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1p:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/common.css">
+    <link rel="stylesheet" href="/css/field.css">
+</head>
+<body>
+<header th:replace="~{fragments/header :: siteHeader}"></header>
+    <main class="module-label-in-package">
+        <section class="preface">
+            <h1>はじめる前に、かんたんチェック！！</h1>
+            <p>クイズ感覚で、ITパスポートの世界をのぞいてみよう！</p>
+        </section>
+        <section class="contents">
+            <section class="mini-quiz">
+                <section class="mini-quiz-bun">
+                    <h2 class="mini-quiz-title">ミニクイズ : ITパスの３分野は？</h2>
+                    <p class="mini-quiz-text"> ITパスポートの３分野として正しい組み合わせはどれ？</p>
+
+                    <form id="quizForm">
+                        <label class="choice">
+                            <input type="radio" name="q1" value="1">
+                            ストラテジ・マネジメント・テクノロジ
+                        </label><br>
+
+                        <label class="choice">
+                            <input type="radio" name="q1" value="2">
+                            開発・運用・保守
+                        </label><br>
+
+                        <label class="choice">
+                            <input type="radio" name="q1" value="3">
+                            ハード・ソフト・ネットワーク
+                        </label><br>
+
+                        <button type="button" class="quiz-button" onclick="checkQuiz()">答える</button>
+                    </form>
+
+                    <div id="quizResult"></div>
+                </section>
+                    <img src= "/images/explain/field1.jpg" alt= "分野選択画像" class="mini-quiz-img">
+            </section>
+
+
+            <section class="field">
+                <section class="field-title">
+                    <h2>分野別で勉強を始める！</h2>
+                </section>
+
+                <section class="field-button-aria">
+                    <img src="/images/explain/flexChoice.jpg" alt="分野選択" class="fleld-img">
+                    <section class="field-button">
+                        <a th:href="@{/question(field='strategy', index=0)}">ストラテジ</a>
+                        <a th:href="@{/question(field='management', index=0)}">マネジメント</a>
+                        <a th:href="@{/question(field='technology', index=0)}">テクノロジ</a>
+                    </section>
+                </section>
+
+            </section>
+        </section>
+    </main>
+    <hr>
+    <a class="top-page" href="/">← トップに戻る</a><br>
+    <footer>
+        <p class="copyright">
+            © 2026 ITパス学習アプリ
+        </p>
+        <p class="credits">
+            イラスト提供<br>
+            <a href="https://jp.freepik.com/free-vector/cartoon-tiny-young-programmers-coders-working-with-computers-flat-illustration_14623773.htm">著作者：pch.vector／出典：Freepik</a><br>
+            <a href="https://jp.freepik.com/free-vector/students-learning-foreign-language-with-vocabulary_11235885.htm">著作者：pch.vector／出典：Freepik</a>
+        </p>
+    </footer>
+</body>
+<script>
+    function checkQuiz() {
+        // 選ばれているラジオボタンを取得
+        const selected = document.querySelector('input[name="q1"]:checked');
+        const result = document.getElementById('quizResult');
+
+        // 何も選ばれていない場合
+        if (!selected) {
+            result.textContent = "選択肢を選んでください。";
+            result.style.color = "#666";
+            return;
+        }
+
+        // 正解は value="1"
+        if (selected.value === "1") {
+            result.textContent =
+                "✅ 正解！ITパスポートは3分野（ストラテジ・マネジメント・テクノロジ）です。\n\n" +
+                "開発・運用・保守はシステムの作業工程を表す言葉で分野の区別ではありません。\n" +
+                "ハード・ソフト・ネットワークはテクノロジ分野の内容であり分野名ではありません。";
+            result.style.color = "#1f7a5a";
+        } else {
+            result.textContent =
+                "❌ 不正解。正解は「ストラテジ・マネジメント・テクノロジ」です。\n\n" +
+                "開発・運用・保守はシステムの作業工程を表す言葉で分野の区別ではありません。\n" +
+                "ハード・ソフト・ネットワークはテクノロジ分野の内容であり分野名ではありません。";
+            result.style.color = "#b00020";
+        }
+
+
+    }
+</script>
+
+</html>
