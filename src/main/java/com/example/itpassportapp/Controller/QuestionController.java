@@ -374,7 +374,7 @@ public class QuestionController {
         session.setAttribute("wrongList", wrongList);
         model.addAttribute("questions", wrongList);
 
-        return "/myPage/reviewWrongList";
+        return "myPage/reviewWrongList";
     }
 
     //間違えた問題を表示画面用
