@@ -197,7 +197,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 80px
+    gap: 80px;
 }
 .it-pass h3{
     font-size: 25px;
@@ -358,6 +358,29 @@ body.modal-open{
 @media (max-width: 899px){
     .hero{
         grid-template-columns: 1fr;
+    }
+
+    .it-pass{
+        flex-direction: column;
+        gap: 28px;
+        padding: 48px 18px;
+        overflow: hidden;
+    }
+
+    .it-pass-left{
+        width: 100%;
+    }
+
+    .it-pass h3{
+        font-size: 22px;
+    }
+
+    .it-pass p{
+        padding: 10px 0;
+    }
+
+    .top-image2{
+        max-width: min(100%, 360px);
     }
 
     .continue-section{
